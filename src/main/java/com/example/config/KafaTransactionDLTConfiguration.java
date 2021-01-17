@@ -77,7 +77,11 @@ public class KafaTransactionDLTConfiguration {
 		LOGGER.info(">>>>>> Received transactional message(in-transaction) from topic[{}] and payload[{}]", topic,
 				payload);
 		customEventPublisher.publish(payload + "=> Consumed & DB insert is success");
-		// Throwing exception programmatically to test DLT by committing KafkaTransaction on 'my-replicated-demo-topic' topic
+		/**
+		 *  Note: Throwing an exception programmatically to test ChainedTransactionBehaviour and move the message to 
+		 *  DLT Topic by committing KafkaTransaction on current topic
+		 */
+		// 
 		titleRepository.save(null);
 		System.out.println(kafkaTemplate.inTransaction());
 
